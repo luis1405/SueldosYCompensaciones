@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Infraestructure.Interfaces
 {
-    public interface IRolRepository
-    {        
-        Task<List<RolDTO>> GetRoles();
-        Task<RolDTO> GetRol(int rolId);
-        Task Save();
+    public interface IEntregaRepository
+    {
+        Task<EntregaDTO> GetEntregas(int IdEmpleado, int IdMes);
+
+        Task<int> Save(EntregaDTO entrega);
     }
 }

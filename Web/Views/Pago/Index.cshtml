@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Application.DTOs.EntregaDTO>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdMes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Empleado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CantidadEntregas)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdMes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Empleado.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CantidadEntregas)
+            </td>
+            <td>
+                    <a asp-action="Detalle" asp-route-empleado="@item.IdEmpleado" asp-route-mes="@item.IdMes">detalle</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

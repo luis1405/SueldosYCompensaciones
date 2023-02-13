@@ -76,7 +76,7 @@ namespace Web.Controllers
                     new { IdMes = 12, Descripcion = "Diciembre" },
                 }.ToList();
 
-                    ViewBag.ListMeses = listMeses;
+                ViewBag.ListMeses = listMeses;
 
 
                 var result = _entregaRepository.Save(entrega).Result;

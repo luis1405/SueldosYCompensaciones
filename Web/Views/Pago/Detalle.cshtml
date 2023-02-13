@@ -1,0 +1,68 @@
+﻿@model Application.DTOs.EmpleadoDTO
+
+<div>
+    <h4>Empleado</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Rol)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Rol.Descripcion)
+        </dd>
+        <dt class="col-sm-2">
+            Salario por Hora
+        </dt>
+        <dd class="col-sm-10">
+            $ @ViewBag.SalarioXHora
+        </dd>
+        <dt class="col-sm-2">
+            Entregas en el mes
+        </dt>
+        <dd class="col-sm-10">
+            @ViewBag.Entregas
+        </dd>
+        <dt class="col-sm-2">
+            Compensaciones por cada entrega
+        </dt>
+        <dd class="col-sm-10">
+            $ @ViewBag.Compensacion
+        </dd>
+        <dt class="col-sm-2">
+            Bono por Hora
+        </dt>
+        <dd class="col-sm-10">
+            $ @ViewBag.BonoHora
+        </dd>
+        <dt class="col-sm-2">
+            % en Vales de Despensa
+        </dt>
+        <dd class="col-sm-10">
+            @ViewBag.PorcentajeVales %
+        </dd>
+        <dt class="col-sm-2">
+            Salario antes de Impuestos
+        </dt>
+        <dd class="col-sm-10">
+            $ @ViewBag.SalarioAntesImpuestos
+        </dd>
+        <dt class="col-sm-2">
+            % de impuestos Aplicables
+        </dt>
+        <dd class="col-sm-10">
+            @ViewBag.ImpuestosAplicables %
+        </dd>
+        <dt class="col-sm-2">
+            Sueldo despues de Impuestos
+        </dt>
+        <dd class="col-sm-10">
+            $ @ViewBag.SalarioDespuesImpuestos
+        </dd>
+    </dl>
+</div>

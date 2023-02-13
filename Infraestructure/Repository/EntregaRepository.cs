@@ -23,7 +23,7 @@ namespace Infraestructure.Repository
         public async Task<EntregaDTO> GetEntregas(int IdEmpleado, int IdMes)
         {
             Entrega resultData = await _appDbContext.Entregas.Where(r => r.IdEmpleado == IdEmpleado && r.IdMes == IdMes)
-                                .Include(r => r.Empleado).FirstOrDefaultAsync();
+                                .Include(r => r.Empleado).ThenInclude(r => r.Rol).FirstOrDefaultAsync();
             if (resultData == null)
                 return null;
 
@@ -36,8 +36,39 @@ namespace Infraestructure.Repository
                     IdRol = resultData.Empleado.IdRol,
                     IdEmpleado = resultData.Empleado.IdEmpleado,
                     Nombre = resultData.Empleado.Nombre,
+                    Rol = new RolDTO()
+                    {
+                        IdRol = resultData.Empleado.Rol.IdRol,
+                        Descripcion = resultData.Empleado.Rol.Descripcion
+                    }
                 }
             };
+
+            return entrega;
+        }
+        public async Task<List<EntregaDTO>> GetAllEntregas()
+        {
+            List<Entrega> resultData = await _appDbContext.Entregas.Include(r => r.Empleado).ThenInclude(r => r.Rol).ToListAsync();
+            if (resultData == null)
+                return null;
+
+            List<EntregaDTO> entrega = resultData.Select(r => new EntregaDTO()
+            {
+                IdEmpleado = r.IdEmpleado,
+                IdMes = r.IdMes,
+                CantidadEntregas = r.CantidadEntregas,
+                Empleado = new EmpleadoDTO()
+                {
+                    IdRol = r.Empleado.IdRol,
+                    IdEmpleado = r.Empleado.IdEmpleado,
+                    Nombre = r.Empleado.Nombre,
+                    Rol = new RolDTO()
+                    {
+                        IdRol = r.Empleado.Rol.IdRol,
+                        Descripcion = r.Empleado.Rol.Descripcion
+                    }
+                }
+            }).ToList();
 
             return entrega;
         }

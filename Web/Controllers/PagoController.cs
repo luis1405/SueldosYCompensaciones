@@ -26,14 +26,16 @@ namespace Web.Controllers
         }
         public ActionResult Index()
         {
-
-            return Ok("Pagos");
+            List<EntregaDTO> entregas = _entregasRepository.GetAllEntregas().Result;
+            if(entregas != null)
+                return View(entregas);
+            return View();  
         }
 
         //[HttpGet("{empleado:int}/{mes:int}")]
         //[HttpGet]
-        [Route("/pago/{empleado}/{mes}")]
-        public async Task<ActionResult> Index(int empleado, int mes)
+        [Route("/pago/detalle/{empleado}/{mes}")]
+        public async Task<ActionResult> Detalle(int empleado, int mes)
         {
             EmpleadoDTO resultEmpleado = await _empleadoRepository.GetEmpleado(empleado);
             EntregaDTO resultEntregas = await _entregasRepository.GetEntregas(empleado, mes);
@@ -45,7 +47,15 @@ namespace Web.Controllers
             decimal salarioDespuesImpuestos = salarioAntesImpuesto - ((salarioAntesImpuesto * porcentajeImpuestosAplicables) / 100);
 
 
-            return Ok(salarioDespuesImpuestos);
+            ViewBag.SalarioXHora = Math.Round(resultSyC.SueldoBase, 2);
+            ViewBag.Entregas = resultEntregas.CantidadEntregas;
+            ViewBag.Compensacion = Math.Round(resultSyC.CompensacionXEntrega, 2);
+            ViewBag.BonoHora = Math.Round(resultSyC.BonoxHora, 2);
+            ViewBag.PorcentajeVales = resultSyC.PorcentajeValesDespensa;
+            ViewBag.ImpuestosAplicables = porcentajeImpuestosAplicables;
+            ViewBag.SalarioAntesImpuestos = Math.Round(salarioAntesImpuesto, 2);
+            ViewBag.SalarioDespuesImpuestos = Math.Round(salarioDespuesImpuestos, 2);
+            return View(resultEmpleado);
         }
     }
 }

@@ -1,3 +1,5 @@
+using Application.Features;
+using Application.Features.Interfaces;
 using Infraestructure.Context;
 using Infraestructure.Interfaces;
 using Infraestructure.Repository;
@@ -7,7 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>();
+builder.Services.AddScoped<IEmpleadoRepository, EmpleadoRepository>();
+builder.Services.AddScoped<ISueldoYCompensacionRepository, SueldoYCompensacionRepository>();
+builder.Services.AddScoped<IEntregaRepository, EntregaRepository>();
 builder.Services.AddScoped<IRolRepository, RolRepository>();
+builder.Services.AddScoped<IImpuestoRepository, ImpuestoRepository>();
+builder.Services.AddScoped<IRolFeatures, RolFeatures>();
+builder.Services.AddScoped<IPagoFeatures, PagoFeatures>();
 
 var app = builder.Build();
 

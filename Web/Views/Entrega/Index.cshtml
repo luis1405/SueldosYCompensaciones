@@ -1,0 +1,42 @@
+﻿@model Application.DTOs.EntregaDTO
+
+
+
+<h4>Entrega</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdEmpleado" class="control-label">Empleado</label>
+                <select asp-for="IdEmpleado" class ="form-control">
+                        @foreach (var empleado in ViewBag.ListEmpleados)
+                        {
+                            <option value="@empleado.IdEmpleado">@empleado.Nombre</option>
+                        }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdMes" class="control-label">Mes</label>
+                    <select asp-for="IdMes" class="form-control">
+                        @foreach (var mes in ViewBag.ListMeses)
+                        {
+                            <option value="@mes.IdMes">@mes.Descripcion</option>
+                        }
+                    </select>
+                <span asp-validation-for="IdMes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CantidadEntregas" class="control-label">Contidad de Entregas</label>
+                <input asp-for="CantidadEntregas" class="form-control" />
+                <span asp-validation-for="CantidadEntregas" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+

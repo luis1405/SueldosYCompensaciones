@@ -1,5 +1,6 @@
 ﻿using Application.DTOs;
 using Application.Features;
+using Application.Features.Interfaces;
 using Infraestructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,12 +9,12 @@ namespace Web.Controllers
     public class RolesController : Controller
     {
         private readonly IRolRepository _rolesRepository;
-        private RolFeatures _rolFeatures;
+        private readonly IRolFeatures _rolFeatures;
 
-        public RolesController(IRolRepository rolesRepository)
+        public RolesController(IRolRepository rolesRepository, IRolFeatures rolFeatures)
         {
             _rolesRepository = rolesRepository;
-            _rolFeatures = new RolFeatures();
+            _rolFeatures = rolFeatures;
         }
 
         public async Task<IActionResult> Index()

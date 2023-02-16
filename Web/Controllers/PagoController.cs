@@ -37,25 +37,16 @@ namespace Web.Controllers
         [Route("/pago/detalle/{empleado}/{mes}")]
         public async Task<ActionResult> Detalle(int empleado, int mes)
         {
+
             EmpleadoDTO resultEmpleado = await _empleadoRepository.GetEmpleado(empleado);
             EntregaDTO resultEntregas = await _entregasRepository.GetEntregas(empleado, mes);
             SueldoYCompensacionDTO resultSyC = await _SyCRepository.GetSueldoYCompensacion(resultEmpleado.IdRol);
 
-            decimal salarioAntesImpuesto = _pagoFeatures.PagoAntesImpuestos(resultEntregas, resultSyC);
-            var porcentajeImpuestosAplicables = _impuestoRepository.GetTotalImpuestos(salarioAntesImpuesto).Result;
+            PagoDTO pagoDto = new PagoDTO(resultEmpleado, resultEntregas, resultSyC);
 
-            decimal salarioDespuesImpuestos = salarioAntesImpuesto - ((salarioAntesImpuesto * porcentajeImpuestosAplicables) / 100);
+            pagoDto.ImpuestosAplicables = _impuestoRepository.GetTotalImpuestos(pagoDto.SueldoBruto).Result;
 
-
-            ViewBag.SalarioXHora = Math.Round(resultSyC.SueldoBase, 2);
-            ViewBag.Entregas = resultEntregas.CantidadEntregas;
-            ViewBag.Compensacion = Math.Round(resultSyC.CompensacionXEntrega, 2);
-            ViewBag.BonoHora = Math.Round(resultSyC.BonoxHora, 2);
-            ViewBag.PorcentajeVales = resultSyC.PorcentajeValesDespensa;
-            ViewBag.ImpuestosAplicables = porcentajeImpuestosAplicables;
-            ViewBag.SalarioAntesImpuestos = Math.Round(salarioAntesImpuesto, 2);
-            ViewBag.SalarioDespuesImpuestos = Math.Round(salarioDespuesImpuestos, 2);
-            return View(resultEmpleado);
+            return View(pagoDto);
         }
     }
 }

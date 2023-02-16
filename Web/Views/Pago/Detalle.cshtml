@@ -1,4 +1,4 @@
-﻿@model Application.DTOs.EmpleadoDTO
+﻿@model Application.DTOs.PagoDTO
 
 <div>
     <h4>Empleado</h4>
@@ -14,55 +14,55 @@
             @Html.DisplayNameFor(model => model.Rol)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Rol.Descripcion)
+            @Html.DisplayFor(model => model.Rol)
         </dd>
         <dt class="col-sm-2">
-            Salario por Hora
+            @Html.DisplayNameFor(model => model.SueldoBasePorHora)
         </dt>
         <dd class="col-sm-10">
-            $ @ViewBag.SalarioXHora
+            $ @Html.DisplayFor(model => model.SueldoBasePorHora)
         </dd>
         <dt class="col-sm-2">
-            Entregas en el mes
+            @Html.DisplayNameFor(model => model.Entregas)
         </dt>
         <dd class="col-sm-10">
-            @ViewBag.Entregas
+            @Html.DisplayFor(model => model.Entregas)
         </dd>
         <dt class="col-sm-2">
-            Compensaciones por cada entrega
+            @Html.DisplayNameFor(model => model.CompensacionPorEntrega)
         </dt>
         <dd class="col-sm-10">
-            $ @ViewBag.Compensacion
+            $ @Html.DisplayFor(model => model.CompensacionPorEntrega)
         </dd>
         <dt class="col-sm-2">
-            Bono por Hora
+            @Html.DisplayNameFor(model => model.BonoPorHora)
         </dt>
         <dd class="col-sm-10">
-            $ @ViewBag.BonoHora
+            $ @Html.DisplayFor(model => model.BonoPorHora)
         </dd>
         <dt class="col-sm-2">
-            % en Vales de Despensa
+            @Html.DisplayNameFor(model => model.PorcentajeVales)
         </dt>
         <dd class="col-sm-10">
-            @ViewBag.PorcentajeVales %
+            @Html.DisplayFor(model => model.PorcentajeVales) %
         </dd>
         <dt class="col-sm-2">
-            Salario antes de Impuestos
+            @Html.DisplayNameFor(model => model.SueldoBruto)
         </dt>
         <dd class="col-sm-10">
-            $ @ViewBag.SalarioAntesImpuestos
+            $ @Html.DisplayFor(model => model.SueldoBruto)
         </dd>
         <dt class="col-sm-2">
-            % de impuestos Aplicables
+            @Html.DisplayNameFor(model => model.ImpuestosAplicables)
         </dt>
         <dd class="col-sm-10">
-            @ViewBag.ImpuestosAplicables %
+            @Html.DisplayFor(model => model.ImpuestosAplicables) %
         </dd>
         <dt class="col-sm-2">
-            Sueldo despues de Impuestos
+            @Html.DisplayNameFor(model => model.SueldoNeto)
         </dt>
         <dd class="col-sm-10">
-            $ @ViewBag.SalarioDespuesImpuestos
+            $ @Html.DisplayFor(model => model.SueldoNeto)
         </dd>
     </dl>
 </div>

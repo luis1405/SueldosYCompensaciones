@@ -26,11 +26,11 @@ namespace Application.DTOs
         [DisplayName("Sueldo base por mes")]
         public decimal SueldoBasePorMes { get => SueldoDiario * DiasPorMes; }
         [DisplayName("Compensacion por entrega")]
-        public decimal CompensacionPorEntregs { get => _SyC.CompensacionXEntrega; }
+        public decimal CompensacionPorEntrega { get => _SyC.CompensacionXEntrega; }
         [DisplayName("Entregas del mes")]
         public int Entregas { get => _entrega.CantidadEntregas; }
         [DisplayName("Adicional por entregas")]
-        public decimal AdicionalPorEntrega { get => CompensacionPorEntregs * _entrega.CantidadEntregas; }
+        public decimal AdicionalPorEntrega { get => CompensacionPorEntrega * _entrega.CantidadEntregas; }
         [DisplayName("Horas Laboradas")]
         public int HorasLaboradas { get => (_SyC.HorasXJornada * _SyC.DiasXSemana) * 4; }
         [DisplayName("Bono por hora")]

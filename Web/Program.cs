@@ -3,12 +3,16 @@ using Application.Features.Interfaces;
 using Infraestructure.Context;
 using Infraestructure.Interfaces;
 using Infraestructure.Repository;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<AppDbContext>();
+builder.Services.AddDbContext<AppDbContext>(options => {
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"));
+});
 builder.Services.AddScoped<IEmpleadoRepository, EmpleadoRepository>();
 builder.Services.AddScoped<ISueldoYCompensacionRepository, SueldoYCompensacionRepository>();
 builder.Services.AddScoped<IEntregaRepository, EntregaRepository>();
